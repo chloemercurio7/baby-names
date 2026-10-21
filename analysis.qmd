@@ -1,0 +1,25 @@
+---
+title: "The Name Chloe Over Time"
+format: html
+---
+
+This plot shows the number of babies named Chloe in each year, split by sex.
+Run `python download.py` first to create the data file used below.
+
+```{r}
+library(tidyverse)
+
+names <- read_csv("ssa-baby-names.csv", show_col_types = FALSE)
+
+chloe <- names |>
+  filter(name == "Chloe") |>
+  mutate(sex = recode(sex, F = "Female", M = "Male"))
+
+ggplot(chloe, aes(x = year, y = count, color = sex)) +
+  geom_line() +
+  labs(
+    x = "Year",
+    y = "Number of babies",
+    color = "Sex"
+  )
+```
